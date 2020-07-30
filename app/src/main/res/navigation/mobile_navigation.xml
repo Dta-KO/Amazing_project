@@ -9,14 +9,13 @@
         android:id="@+id/nav_chart"
         android:name="com.vietnamrubbergroup.ui.chart.ChartFragment"
         android:label="@string/menu_chart"
-        tools:layout="@layout/fragment_reporting" />
+        tools:layout="@layout/fragment_chart"></fragment>
 
     <fragment
         android:id="@+id/nav_reporting"
         android:name="com.vietnamrubbergroup.ui.reporting.ReportingFragment"
-
         android:label="@string/menu_reporting"
-        tools:layout="@layout/fragment_chart" />
+        tools:layout="@layout/fragment_reporting" />
 
     <fragment
         android:id="@+id/nav_send_report"

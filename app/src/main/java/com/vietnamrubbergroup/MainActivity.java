@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private List<MenuModel> parentList = new ArrayList<>();
     private HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private void setNavigation() {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_chart, R.id.nav_reporting, R.id.nav_send_report)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
     }
@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
             if (parentList.get(parentPosition).isGroup) {
                 if (!parentList.get(parentPosition).hasChildren) {
                     //transition fragment
-
-                    onBackPressed();
+                    navController.navigate(parentList.get(parentPosition).idFragment);
+                    mAppBarConfiguration.getOpenableLayout().close();
                 }
             }
 
@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 MenuModel model = childList.get(parentList.get(parentPosition)).get(childPosition);
                 if (model.idFragment > 0) {
                     //transition fragment
-
-                    onBackPressed();
+                    navController.navigate(model.idFragment);
+                    mAppBarConfiguration.getOpenableLayout().close();
                 }
             }
 
@@ -158,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
