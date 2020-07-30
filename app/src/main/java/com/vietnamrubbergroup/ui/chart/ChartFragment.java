@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.vietnamrubbergroup.R;
 
 public class ChartFragment extends Fragment {
@@ -19,8 +20,8 @@ public class ChartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         chartViewModel = new ViewModelProvider(this).get(ChartViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
+        View root = inflater.inflate(R.layout.fragment_chart, container, false);
+        final TextView textView = root.findViewById(R.id.text_chart);
         chartViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }

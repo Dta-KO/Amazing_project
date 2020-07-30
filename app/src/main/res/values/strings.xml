@@ -12,8 +12,21 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    //menu drawer
     <string name="menu_chart">Chart</string>
-    <string name="menu_reporting">Reports</string>
+
     <string name="menu_send_report">Send Report</string>
+    <string name="menu_send_report_1">Form Report 1</string>
+    <string name="menu_send_report_2">Form Report 2</string>
+    <string name="menu_send_report_3">Form Report 3</string>
+
     <string name="title_activity_main">MainActivity</string>
+
+    <string name="menu_reporting">Reports</string>
+    <string name="menu_reporting_5">Reporting half year</string>
+    <string name="menu_reporting_1">Reporting week</string>
+    <string name="menu_reporting_2">Reporting month</string>
+    <string name="menu_reporting_3">Reporting precious</string>
+    <string name="menu_reporting_4">Reporting year</string>
+
 </resources>
