@@ -2,11 +2,8 @@ package com.vietnamrubbergroup;
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ExpandableListView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,9 +12,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.vietnamrubbergroup.adapter.ExpandableListAdapter;
 import com.vietnamrubbergroup.databinding.ActivityMainBinding;
 import com.vietnamrubbergroup.model.MenuModel;
@@ -26,11 +21,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private ExpandableListAdapter expandableListAdapter;
-    private ExpandableListView expandableListView;
     private List<MenuModel> parentList = new ArrayList<>();
     private HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
 
@@ -40,9 +33,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setToolBar();
-        setFloatBtn();
         setNavigation();
         generateMenuData();
+        setHeaderDrawer();
         setExpandableListView();
 
     }
@@ -52,91 +45,80 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
     }
 
-    private void setFloatBtn() {
-        FloatingActionButton fab = binding.appBarMain.fab;
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-    }
-
     private void setNavigation() {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder()
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_chart, R.id.nav_reporting, R.id.nav_send_report)
                 .setOpenableLayout(drawer)
                 .build();
-        navigationView.setNavigationItemSelectedListener(this);
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        setHeaderDrawer();
-        setExpandableListView();
     }
-    private void generateMenuData(){
+
+    //generate data for menu drawer navigation
+    private void generateMenuData() {
         //add chart to menu
-        MenuModel model = new MenuModel(R.string.menu_chart,R.id.nav_chart,false,true);
+        MenuModel model = new MenuModel(R.string.menu_chart, R.id.nav_chart, false, true, R.drawable.ic_chart);
         parentList.add(model);
-        if(!model.hasChildren){
-            childList.put(model,null);
+        if (!model.hasChildren) {
+            childList.put(model, null);
         }
         //add reporting to menu
-        model = new MenuModel(R.string.menu_reporting,0,true,true);
+        model = new MenuModel(R.string.menu_reporting, 0, true, true, R.drawable.reporting);
         parentList.add(model);
         List<MenuModel> childModelList = new ArrayList<>();
         //add reporting 1
-        MenuModel childModel = new MenuModel(R.string.menu_reporting_1,R.id.nav_reporting,false,false);
+        MenuModel childModel = new MenuModel(R.string.menu_reporting_1, R.id.nav_reporting, false, false, 0);
         childModelList.add(childModel);
         //add reporting 2
-        childModel = new MenuModel(R.string.menu_reporting_2,R.id.nav_reporting,false,false);
+        childModel = new MenuModel(R.string.menu_reporting_2, R.id.nav_reporting, false, false, 0);
         childModelList.add(childModel);
         //add reporting 3
-        childModel = new MenuModel(R.string.menu_reporting_3,R.id.nav_reporting,false,false);
+        childModel = new MenuModel(R.string.menu_reporting_3, R.id.nav_reporting, false, false, 0);
         childModelList.add(childModel);
         //add reporting 4
-        childModel = new MenuModel(R.string.menu_reporting_4,R.id.nav_reporting,false,false);
+        childModel = new MenuModel(R.string.menu_reporting_4, R.id.nav_reporting, false, false, 0);
         childModelList.add(childModel);
         //add reporting 5
-        childModel = new MenuModel(R.string.menu_reporting_5,R.id.nav_reporting,false,false);
+        childModel = new MenuModel(R.string.menu_reporting_5, R.id.nav_reporting, false, false, 0);
         childModelList.add(childModel);
 
-        if(model.hasChildren){
-            childList.put(model,childModelList);
+        if (model.hasChildren) {
+            childList.put(model, childModelList);
         }
         childModelList = new ArrayList<>();
-        model = new MenuModel(R.string.menu_send_report,0,true,true);
+        model = new MenuModel(R.string.menu_send_report, 0, true, true, R.drawable.send_report);
         parentList.add(model);
         //add form report 1
-        childModel = new MenuModel(R.string.menu_send_report_1,R.id.nav_send_report,false,false);
+        childModel = new MenuModel(R.string.menu_send_report_1, R.id.nav_send_report, false, false, 0);
         childModelList.add(childModel);
         //add form report 2
-        childModel = new MenuModel(R.string.menu_send_report_2,R.id.nav_send_report,false,false);
+        childModel = new MenuModel(R.string.menu_send_report_2, R.id.nav_send_report, false, false, 0);
         childModelList.add(childModel);
         //add form report 3
-        childModel = new MenuModel(R.string.menu_send_report_3,R.id.nav_send_report,false,false);
+        childModel = new MenuModel(R.string.menu_send_report_3, R.id.nav_send_report, false, false, 0);
         childModelList.add(childModel);
 
-        if(model.hasChildren){
-            childList.put(model,childModelList);
+        if (model.hasChildren) {
+            childList.put(model, childModelList);
         }
 
 
     }
 
+    //set menu for drawer navigation
     private void setExpandableListView() {
-        expandableListView = binding.expandableListView;
-        expandableListAdapter = new ExpandableListAdapter(this,parentList,childList);
+        ExpandableListView expandableListView = binding.expandableListView;
+        ExpandableListAdapter expandableListAdapter = new ExpandableListAdapter(this, parentList, childList);
         expandableListView.setAdapter(expandableListAdapter);
         expandableListView.setOnGroupClickListener((expandableListView1, view, parentPosition, id) -> {
             if (parentList.get(parentPosition).isGroup) {
                 if (!parentList.get(parentPosition).hasChildren) {
                     //transition fragment
-                    
+
                     onBackPressed();
                 }
             }
@@ -159,7 +141,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void setHeaderDrawer(){
+    private void changeToFragment(int idFragment) {
+
+    }
+
+    //set header drawer navigation
+    private void setHeaderDrawer() {
     }
 
     @Override
@@ -176,9 +163,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 || super.onSupportNavigateUp();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        return true;
-    }
 }

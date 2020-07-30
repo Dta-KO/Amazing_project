@@ -2,20 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/color_state">
 
     <TextView
         android:id="@+id/txt_list_item"
         android:layout_width="match_parent"
-        android:layout_height="?attr/listPreferredItemHeightSmall"
-        android:drawableStart="@drawable/ic_arrow_forward"
+        android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_arrow"
+        android:gravity="center_vertical"
         android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingTop="@dimen/item_drawer"
         android:paddingEnd="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingBottom="@dimen/item_drawer"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="18sp"
-        android:gravity="center_vertical"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

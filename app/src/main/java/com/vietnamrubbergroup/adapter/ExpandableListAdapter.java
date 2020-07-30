@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vietnamrubbergroup.R;
+import com.vietnamrubbergroup.databinding.ListGroupParentsBinding;
 import com.vietnamrubbergroup.model.MenuModel;
 
 import java.util.HashMap;
@@ -80,6 +82,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         TextView lblListHeader = view.findViewById(R.id.txt_list_header);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+
+        ImageView imgParent = view.findViewById(R.id.img_list_header);
+        imgParent.setImageDrawable(context.getDrawable(getGroup(i).idImg));
         return view;
     }
 

@@ -6,44 +6,14 @@ package com.vietnamrubbergroup.model;
 public class MenuModel {
     public int menuName;
     public int idFragment;
+    public int idImg;
     public boolean hasChildren, isGroup;
 
-    public MenuModel(int menuName, int idFragment, boolean hasChildren, boolean isGroup) {
+    public MenuModel(int menuName, int idFragment, boolean hasChildren, boolean isGroup, int idImg) {
         this.menuName = menuName;
         this.idFragment = idFragment;
         this.hasChildren = hasChildren;
         this.isGroup = isGroup;
-    }
-
-    public int getMenuName() {
-        return menuName;
-    }
-
-    public void setMenuName(int menuName) {
-        this.menuName = menuName;
-    }
-
-    public int getIdFragment() {
-        return idFragment;
-    }
-
-    public void setIdFragment(int idFragment) {
-        this.idFragment = idFragment;
-    }
-
-    public boolean isHasChildren() {
-        return hasChildren;
-    }
-
-    public void setHasChildren(boolean hasChildren) {
-        this.hasChildren = hasChildren;
-    }
-
-    public boolean isGroup() {
-        return isGroup;
-    }
-
-    public void setGroup(boolean group) {
-        isGroup = group;
+        this.idImg = idImg;
     }
 }
